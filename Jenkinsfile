@@ -1,7 +1,7 @@
 pipeline {
+  agent { node { label 'build' } }
     stages {
       stage ('my build') {
-        agent { node { label 'build' } }
         steps {
          sh 'echo ${BUILD_NUMBER}'
          sh 'mvn deploy'
