@@ -14,7 +14,7 @@ pipeline {
        sh 'pwd'
        sh 'whoami'
        sh 'curl -u yathiraj.raj94@gmail.com:Laanl94@ -O "https://yathirajgs.jfrog.io/artifactory/default-libs-release-local/com/efsavage/hello-world-war/1.0.0/hello-world-war-1.0.0.war"'
-       sh 'sudo cp -R hello-world-war-${BUILD_NUMBER}.war /opt/apache-tomcat-10.0.27/webapps/'
+       sh 'sudo cp -R hello-world-war-${BUILD_NUMBER}.war /opt/tomcat/webapps/'
        sh 'sh /opt/tomcat/bin/shutdown.sh'
        sh 'sh /opt/tomcat/bin/startup.sh'
       }
