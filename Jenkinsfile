@@ -16,6 +16,7 @@ pipeline {
         sh 'curl -u yathiraj.raj94@gmail.com:Laanl94@ -O "https://yathirajgs.jfrog.io/artifactory/default-libs-release-local/com/efsavage/hello-world-war/${BUILD_NUMBER}/hello-world-war-${BUILD_NUMBER}.war"'
         sh 'sudo cp -r hello-world-war${BUILD_NUMBER}.war /opt/tomcat/webapps/'
         sh 'sh /opt/tomcat/bin/shutdown.sh'
+        sh 'sleep 3' 
         sh 'sh /opt/tomcat/bin/startup.sh'
       }
     } 
