@@ -12,7 +12,7 @@ pipeline {
         agent { node { label 'build' } }
           steps {
             sh 'echo ${BUILD_VERSION}'
-            sh 'docker login -u waliuddin -p wali@8792'
+            sh 'docker login -u waliuddin -p Wali@8792'
             sh 'docker tag tomcatimage waliuddin/mytomcat'
             sh 'docker push waliuddin/mytomcat'
         }
