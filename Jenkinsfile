@@ -7,7 +7,8 @@ pipeline {
         }
       }
       stage (publish) {
-        steps {
+        agent { node { label 'build' } }
+          steps {
             sh 'docker login -u gsyathiraj -p Yathiraj94@'
             sh 'docker tag tomcatimage gsyathiraj/tomcatproject:${BUILD_VERSION}'
             sh 'docker push gsyathiraj/tomcatproject:${BUILD_VERSION}'
