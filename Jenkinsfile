@@ -3,7 +3,7 @@ pipeline {
     stages {
       stage ('my build') {
         steps {
-          sh '${BUILD_VERSION}' 
+         sh '${BUILD_VERSION}' 
          sh 'docker build -t tomcatimage:${BUILD_VERSION} .'
         }
       }
