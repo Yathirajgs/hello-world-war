@@ -1,0 +1,26 @@
+pipeline {
+    agent none
+    stages {
+        stage ('build stage') {
+            agent { label 'build' }
+            steps {
+                sh 'docker build -t mytomimage .'
+            }
+        }
+        stage ('publish stage') {
+            agent {label 'build'}
+            steps {
+                sh 'docker login -u waliuddin -p wali@1234'
+                sh 'docker tag mytomimage waliuddin/mytomcat'
+                sh 'docker push waliuddin/mytomcat'
+            }
+        }
+        stage ('deploy stage') {
+            agent { label 'deploy' }
+            steps {
+                sh 'docker pull waliuddin/mytomcat'
+                sh 'docker rm -f container1'
+                sh 'docker run -d -p 8080:8080 --name container1 waliuddin/mytomcat'
+            }
+        }
+    }
