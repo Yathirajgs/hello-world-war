@@ -5,7 +5,7 @@ pipeline {
         agent { node { label 'build' } }
         steps {
          sh 'echo ${BUILD_VERSION}' 
-         sh 'docker build -t tomcatimage:${BUILD_VERSION} .'
+         sh 'docker build -t tomcatimage .'
         }
       }
       stage (publish) {
