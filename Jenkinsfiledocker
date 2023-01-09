@@ -13,7 +13,7 @@ pipeline {
           steps {
             sh 'echo ${BUILD_VERSION}'
             sh 'docker login -u gsyathiraj -p Yathiraj94@'
-            sh 'docker tag tomcatimage:${BUILD_VERSION} gsyathiraj/tomcatproject:latest'
+            sh 'docker tag tomcatimage gsyathiraj/tomcatproject:latest'
             sh 'docker push gsyathiraj/tomcatproject:latest'
         }
       } 
