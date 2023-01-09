@@ -4,6 +4,6 @@ WORKDIR ${TEST}
 COPY . .
 RUN mvn clean package
 
-FROM tomcat:9.0
+FROM tomcat:jre8-temurin-focal
 ARG TEST=/sangmesh
 COPY --from=build_stage ${TEST}/target/hello-world-war-null.war /usr/local/tomcat/webapps/
