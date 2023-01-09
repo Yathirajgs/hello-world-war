@@ -17,7 +17,7 @@ pipeline {
     stage ('my deploy') {
       agent { node { label 'deploy' } }
        steps {
-        sh 'docker pull gsyathiraj/tomcatproject:latest'
+        sh 'docker pull gsyathiraj/tomcatproject:${BUILD_VERSION}'
         sh 'docker rm -f tomcatproject' 
          sh 'docker run -d -p 8080:8080 -name tomactproject gsyathiraj/tomcatimage:${BUILD_VERSION}'
       }
