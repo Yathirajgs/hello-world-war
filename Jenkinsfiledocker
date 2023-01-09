@@ -12,7 +12,7 @@ pipeline {
         agent { node { label 'build' } }
           steps {
             sh 'echo ${BUILD_VERSION}'
-            sh 'docker login -u waliuddin -p wali@1234'
+            sh 'docker login -u waliuddin -p wali@8792'
             sh 'docker tag tomcatimage waliuddin/mytomcat'
             sh 'docker push waliuddin/mytomcat'
         }
@@ -20,9 +20,9 @@ pipeline {
     stage ('my deploy') {
       agent { node { label 'deploy' } }
        steps {
-        sh 'docker pull gsyathiraj/tomcatproject'
-        sh 'docker rm -f tomcatproject:latest' 
-        sh 'docker run -d -p 8080:8080 --name tomactproject gsyathiraj/tomcatproject'
+        sh 'docker pull waliuddin/mytomcat'
+        sh 'docker rm -f mytomcat:latest' 
+        sh 'docker run -d -p 8080:8080 --name tomactproject waliuddin/mytomcat'
       }
     } 
   }
