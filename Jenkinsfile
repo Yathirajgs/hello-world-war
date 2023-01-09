@@ -3,21 +3,22 @@ pipeline {
     stages {
       stage ('my build') {
         steps {
-         sh "echo ${BUILD_NUMBER}"
-         sh 'mvn deploy'
-         sh 'pwd'
+         sh 'docker build -t tomcatimage:${BUILD_VERSION} .'
         }
       }
+      stage (publish) {
+        steps {
+            sh 'docker login -u gsyathiraj -p Yathiraj94@'
+            sh 'docker tag tomcatimage gsyathiraj/tomcatproject:${BUILD_VERSION}'
+            sh 'docker push gsyathiraj/tomcatproject:${BUILD_VERSION}'
+        }
+      } 
     stage ('my deploy') {
       agent { node { label 'deploy' } }
        steps {
-        sh 'pwd'
-        sh 'whoami'
-        sh 'curl -u yathiraj.raj94@gmail.com:Laanl94@ -O "https://yathirajgs.jfrog.io/artifactory/default-libs-release-local/com/efsavage/hello-world-war/${BUILD_NUMBER}/hello-world-war-${BUILD_NUMBER}.war"'
-        sh 'sudo cp -R hello-world-war-${BUILD_NUMBER}.war /opt/tomcat/webapps/'
-        sh 'sh /opt/tomcat/bin/shutdown.sh'
-        sh 'sleep 3' 
-        sh 'sh /opt/tomcat/bin/startup.sh'
+        sh 'docker pull gsyathiraj/tomcatproject'
+        sh 'docker rm -f tomcatproject' 
+         sh 'docker run -d -p 8080:8080 -name tomactproject gsyathiraj/tomcatimage:${BUILD_VERSION}'
       }
     } 
   }
