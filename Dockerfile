@@ -3,5 +3,5 @@ WORKDIR /wali
 COPY . .
 RUN mvn clean package
 
-FROM tomcat:jre8-temurin-focal
+FROM tomcat:9.0
 COPY --from=mavenbuilder /wali/target/hello-world-war-null.war /usr/local/tomcat/webapps/
