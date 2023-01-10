@@ -5,7 +5,7 @@ pipeline {
         agent { node { label 'build' } }
         steps {
          sh 'echo ${BUILD_VERSION}' 
-         sh 'docker build -t tomcatimage .'
+         sh 'docker build -t tomcatimage:${BUILD_VERSION} --build-arg BUILD_VERSION=${BUILD_VERSION} .'
         }
       }
       stage (publish) {
@@ -13,16 +13,16 @@ pipeline {
           steps {
             sh 'echo ${BUILD_VERSION}'
             sh 'docker login -u gsyathiraj -p Yathiraj94@'
-            sh 'docker tag tomcatimage gsyathiraj/tomcatproject'
-            sh 'docker push gsyathiraj/tomcatproject'
+            sh 'docker tag tomcatimage:${BUILD_VERSION} gsyathiraj/tomcatproject:${BUILD_VERSION}'
+            sh 'docker push gsyathiraj/tomcatproject:${BUILD_VERSION}'
         }
       } 
     stage ('my deploy') {
       agent { node { label 'deploy' } }
        steps {
-        sh 'docker pull gsyathiraj/tomcatproject'
+        sh 'docker pull gsyathiraj/tomcatproject:${BUILD_VERSION}'
         sh 'docker rm -f tomcatproject:latest' 
-        sh 'docker run -d -p 8080:8080 --name tomactproject gsyathiraj/tomcatproject'
+        sh 'docker run -d -p 8080:8080 --name tomactproject gsyathiraj/tomcatproject:${BUILD_VERSION}'
       }
     } 
   }
