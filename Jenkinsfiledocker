@@ -22,7 +22,7 @@ pipeline {
        steps {
         sh 'docker pull gsyathiraj/tomcatproject:latest'
         sh 'docker rm -f tomcatproject:latest' 
-        sh 'docker run -d -p 8080:8080 --name tomactproject gsyathiraj/tomcatproject'
+        sh 'docker run -d -p 8080:8080 --name tomactproject gsyathiraj/tomcatproject:latest'
       }
     } 
   }
