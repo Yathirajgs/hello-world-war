@@ -20,8 +20,8 @@ pipeline {
     stage ('my deploy') {
       agent { node { label 'deploy' } }
        steps {
-        sh 'docker pull gsyathiraj/tomcatproject'
-        sh 'docker rm -f gsyathiraj/tomcatproject:latest' 
+        sh 'docker pull gsyathiraj/tomcatproject:latest'
+        sh 'docker rm -f tomcatproject:latest' 
         sh 'docker run -d -p 8080:8080 --name tomactproject gsyathiraj/tomcatproject'
       }
     } 
