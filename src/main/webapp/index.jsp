@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Welcome to jenkins!</title>
+<title>Welcome to jenkins! DeVops</title>
 </head>
 <body>
 	<h1>Please select the following jenkins topics!</h1>
